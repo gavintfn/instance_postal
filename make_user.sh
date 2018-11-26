@@ -27,7 +27,7 @@
 
   rabbitmq:
     host: 127.0.0.1
-    username: guest
+    username: postal
     password: XXXRABBITMQ_PASSWORDXXX
     vhost:
 
