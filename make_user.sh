@@ -15,21 +15,21 @@
 
   main_db:
     host: 127.0.0.1
-    username: root
+    username: postal
     password:XXXMYSQL_ROOT_PASSWORDXXX
     database: postal
 
   message_db:
     host: 127.0.0.1
-    username: root
-    password:
+    username: postal
+    password:XXXMYSQL_ROOT_PASSWORDXXX
     prefix: postal
 
   rabbitmq:
     host: 127.0.0.1
     username: postal
     password: XXXRABBITMQ_PASSWORDXXX
-    vhost:
+    vhost:/postal
 
   smtp_server:
     port: XXXSMTP_PORTXXX
@@ -48,7 +48,7 @@
     port: XXXSMTP_PORTXXX
     username:XXXADMIN_EMAILXXX
     password:XXXADMIN_PASSWORDXXX
-    from_name: Admin
+    from_name: ADMIN
     from_address: XXXADMIN_EMAILXXX
 
   rails:
