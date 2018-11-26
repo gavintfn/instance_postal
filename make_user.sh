@@ -53,4 +53,3 @@
 
   rails:
     environment: test
-    XXXRAILS_SECRET_KEYXXX
