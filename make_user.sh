@@ -53,4 +53,4 @@
 
   rails:
     environment: test
-    secret_key: c3ed0d4723a5d08f8cdb03571ddec8366da74db114f5419187343632e9c0c0110$
+    XXXRAILS_SECRET_KEYXXX
