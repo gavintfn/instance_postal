@@ -43,10 +43,10 @@
 
   smtp:
     host: 127.0.0.1
-    port: XXXSMTP_PORTXXX
+    port: 2525
     username: #XXXADMIN_EMAILXXX
     password: #XXXADMIN_PASSWORDXXX
-    from_name: ADMIN
-    from_address: XXXADMIN_EMAILXXX
+    from_name: Postal
+    from_address: postal@example.com
 
   rails:
