@@ -50,7 +50,7 @@ postal bundle /opt/postal/vendor/bundle
 postal initialize-config
 postal initialize
 postal start
-postal stop
+
 
 wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
 cp postal.yml.bk /opt/postal/config/postal.yml.bk
@@ -79,7 +79,7 @@ echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYY
 #echo 'ALTER USER `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 echo 'FLUSH PRIVILEGES;' | mysql -u root
-postal start
+postal restart
 
 
 #
