@@ -42,11 +42,11 @@
     track_domain: track.XXXFQDNXXX
 
   smtp:
-    host: 127.0.0.1
-    port: 2525
-    username: #XXXADMIN_EMAILXXX
-    password: #XXXADMIN_PASSWORDXXX
-    from_name: Postal
-    from_address: postal@example.com
+    host: XXXIPADDRXXX
+    port: XXXSMTP_PORTXXX
+    username: XXXADMIN_EMAILXXX
+    password: XXXADMIN_PASSWORDXXX
+    from_name: XXXADMIN_USERNAMEXXX
+    from_address: XXXADMIN_EMAILXXX
 
   rails:
