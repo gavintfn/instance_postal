@@ -34,8 +34,8 @@
 
   dns:
     mx_records: 
-      - XXXFQDNXXX
-    smtp_server_hostname: XXXFQDNXXX
+      - mx.XXXFQDNXXX
+    smtp_server_hostname: smtp.XXXFQDNXXX
     spf_include: spf.XXXFQDNXXX
     return_path: rp.XXXFQDNXXX
     route_domain: routes.XXXFQDNXXX
@@ -44,8 +44,8 @@
   smtp:
     host: 127.0.0.1
     port: XXXSMTP_PORTXXX
-    username: XXXADMIN_EMAILXXX
-    password: XXXADMIN_PASSWORDXXX
+    username: #XXXADMIN_EMAILXXX
+    password: #XXXADMIN_PASSWORDXXX
     from_name: ADMIN
     from_address: XXXADMIN_EMAILXXX
 
