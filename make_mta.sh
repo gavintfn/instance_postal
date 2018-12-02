@@ -54,8 +54,8 @@ postal stop
 
 wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
 cp postal.yml.bk /opt/postal/config/postal.yml.bk
-grep "secret" /opt/postal/config/postal.yml >>  /opt/postal/config/postal.yml.bk
-cp /opt/postal/config/postal.yml postal.yml
+/bin/grep "secret" /opt/postal/config/postal.yml >> /opt/postal/config/postal.yml.bk
+cp /opt/postal/config/postal.yml /opt/postal/config/postal.yml.bkbk
 rm /opt/postal/config/postal.yml -f
 cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/config/postal.yml
