@@ -31,7 +31,7 @@ echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";'
 # RabbitMQ
 #
 rabbitmqctl add_vhost /postal
-rabbitmqctl add_user postal "YYYMYSQL_ROOT_PASSWORDYYY"
+rabbitmqctl add_user postal YYYMYSQL_ROOT_PASSWORDYYY
 rabbitmqctl set_permissions -p /postal postal ".*" ".*" ".*"
 
 #
