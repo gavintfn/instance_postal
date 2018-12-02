@@ -15,27 +15,26 @@
   main_db:
     host: 127.0.0.1
     username: postal
-    password:XXXMYSQL_ROOT_PASSWORDXXX
+    password: XXXMYSQL_ROOT_PASSWORDXXX
     database: postal
 
   message_db:
     host: 127.0.0.1
     username: postal
-    password:XXXMYSQL_ROOT_PASSWORDXXX
+    password: XXXMYSQL_ROOT_PASSWORDXXX
     prefix: postal
 
   rabbitmq:
     host: 127.0.0.1
     username: postal
     password: XXXRABBITMQ_PASSWORDXXX
-    vhost:/postal
+    vhost: /postal
 
   smtp_server:
     port: XXXSMTP_PORTXXX
 
   dns:
-    mx_records:
-      - mx.XXXHOSTNAMEXXX
+    mx_records: mx.XXXHOSTNAMEXXX
     smtp_server_hostname: XXXFQNDXXX
     spf_include: spf.XXXFQNDXXX
     return_path: rp.XXXFQNDXXX
@@ -45,8 +44,8 @@
   smtp:
     host: 127.0.0.1
     port: XXXSMTP_PORTXXX
-    username:XXXADMIN_EMAILXXX
-    password:XXXADMIN_PASSWORDXXX
+    username: XXXADMIN_EMAILXXX
+    password: XXXADMIN_PASSWORDXXX
     from_name: ADMIN
     from_address: XXXADMIN_EMAILXXX
 
