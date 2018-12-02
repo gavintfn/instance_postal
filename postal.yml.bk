@@ -34,12 +34,12 @@
     port: XXXSMTP_PORTXXX
 
   dns:
-    mx_records: mx.XXXHOSTNAMEXXX
-    smtp_server_hostname: XXXFQNDXXX
-    spf_include: spf.XXXFQNDXXX
-    return_path: rp.XXXFQNDXXX
-    route_domain: routes.XXXFQNDXXX
-    track_domain: track.XXXFQNDXXX
+    mx_records: mx.XXXFQDNXXX
+    smtp_server_hostname: smtp.XXXFQDNXXX
+    spf_include: spf.XXXFQDNXXX
+    return_path: rp.XXXFQDNXXX
+    route_domain: routes.XXXFQDNXXX
+    track_domain: track.XXXFQDNXXX
 
   smtp:
     host: 127.0.0.1
