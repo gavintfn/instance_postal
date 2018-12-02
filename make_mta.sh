@@ -74,7 +74,7 @@ cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 
 rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
 echo "SET PASSWORD FOR 'postal'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
-echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD(''YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
+echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
 #echo 'ALTER USER `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 #echo 'ALTER USER `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
