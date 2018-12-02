@@ -69,7 +69,7 @@ postal start
 # nginx
 #
 cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
-/usr/bin/perl -pi -e  "s/postal.yourdomain.com/XXXFQDNXXX/g"  /etc/nginx/sites-available/default
+/usr/bin/perl -pi -e  "s/postal.yourdomain.com/YYYFQDNYYY/g"  /etc/nginx/sites-available/default
 /bin/mkdir /etc/nginx/ssl/
-openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=XXXROOT_DOMAINXXX"
+openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=YYYFQDNYYY"
 /bin/systemctl restart nginx 
