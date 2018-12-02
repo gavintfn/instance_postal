@@ -35,7 +35,7 @@
   dns:
     mx_records: 
       - mx.XXXFQDNXXX
-    smtp_server_hostname: smtp.XXXFQDNXXX
+    smtp_server_hostname: XXXFQDNXXX
     spf_include: spf.XXXFQDNXXX
     return_path: rp.XXXFQDNXXX
     route_domain: routes.XXXFQDNXXX
