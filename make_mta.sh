@@ -52,6 +52,18 @@ postal initialize
 postal start
 
 
+
+
+
+#
+# nginx
+#
+cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
+#usr/bin/perl -pi -e  "s/postal.yourdomain.com/YYYFQDNYYY/g"  /etc/nginx/sites-available/default
+/bin/mkdir /etc/nginx/ssl/
+openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=example.com"
+service nginx reload
+
 wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
 cp postal.yml.bk /opt/postal/config/postal.yml.bk
 /bin/grep "secret" /opt/postal/config/postal.yml >> /opt/postal/config/postal.yml.bk
@@ -69,9 +81,6 @@ cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/config/postal.yml
 
-
-
-
 rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
 echo "SET PASSWORD FOR 'postal'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
 echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
@@ -80,13 +89,3 @@ echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYY
 echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 echo 'FLUSH PRIVILEGES;' | mysql -u root
 postal restart
-
-
-#
-# nginx
-#
-cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
-#usr/bin/perl -pi -e  "s/postal.yourdomain.com/YYYFQDNYYY/g"  /etc/nginx/sites-available/default
-/bin/mkdir /etc/nginx/ssl/
-openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=example.com"
-service nginx reload
