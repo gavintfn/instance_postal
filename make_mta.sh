@@ -64,28 +64,30 @@ cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
 openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=example.com"
 service nginx reload
 
-wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
-cp postal.yml.bk /opt/postal/config/postal.yml.bk
-/bin/grep "secret" /opt/postal/config/postal.yml >> /opt/postal/config/postal.yml.bk
-cp /opt/postal/config/postal.yml /opt/postal/config/postal.yml.bkbk
-rm /opt/postal/config/postal.yml -f
-cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/config/postal.yml
-/usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/printf "$ADMIN_EMAIL\n$ADMIN_FIRSTNAME\n$ADMIN_LASTNAME\n$ADMIN_PASSWORD" | /usr/bin/postal make-user
 
-rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
-echo "SET PASSWORD FOR 'postal'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
-echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
-#echo 'ALTER USER `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-#echo 'ALTER USER `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'FLUSH PRIVILEGES;' | mysql -u root
-postal restart
+#wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
+#cp postal.yml.bk /opt/postal/config/postal.yml.bk
+#/bin/grep "secret" /opt/postal/config/postal.yml >> /opt/postal/config/postal.yml.bk
+#cp /opt/postal/config/postal.yml /opt/postal/config/postal.yml.bkbk
+#rm /opt/postal/config/postal.yml -f
+#cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/config/postal.yml
+#/usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/config/postal.yml
+
+#rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
+#echo "SET PASSWORD FOR 'postal'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
+#echo "SET PASSWORD FOR 'postal'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
+#echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+#echo 'FLUSH PRIVILEGES;' | mysql -u root
+#postal restart
+
+
