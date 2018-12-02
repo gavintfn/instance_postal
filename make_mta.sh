@@ -48,6 +48,7 @@ wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
 postal bundle /opt/postal/vendor/bundle
 postal initialize-config
+postal initialize
 wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
 cp postal.yml.bk /opt/postal/config/postal.yml.bk
 grep "secret" /opt/postal/config/postal.yml >>  /opt/postal/config/postal.yml.bk
@@ -62,8 +63,8 @@ cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g"  /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
-postal initialize
 postal start
+
 
 #
 # nginx
