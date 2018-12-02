@@ -47,6 +47,7 @@ sudo -i -u postal mkdir -p /opt/postal/app
 wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
 postal bundle /opt/postal/vendor/bundle
+postal initialize-config
 
 wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
 cp postal.yml.bk /opt/postal/config/postal.yml.bk
@@ -63,7 +64,6 @@ cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g"  /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
 
-postal initialize-config
 postal initialize
 
 postal start
