@@ -20,18 +20,18 @@ gem install bundler procodile --no-rdoc --no-ri
 #
 # MySQL
 #
+/usr/bin/perl -pi -e  "s/bind-address/#bind-address/g" /etc/mysql/my.cnf
 echo 'CREATE DATABASE `postal` CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;' | mysql -u root
-echo 'GRANT ALL ON `postal`.* TO `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`127.0.0.1`  IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'GRANT ALL ON `postal`.* TO `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`localhost`  IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo 'GRANT ALL ON `postal`.* TO `postal`@`127.0.0.1` IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
+echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`127.0.0.1`  IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
+echo 'GRANT ALL ON `postal`.* TO `postal`@`localhost` IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
+echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`localhost`  IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
 
 #
 # RabbitMQ
 #
 rabbitmqctl add_vhost /postal
-rabbitmqctl add_user postal YYYMYSQL_ROOT_PASSWORDYYY
+rabbitmqctl add_user postal p0stalpassw0rd
 rabbitmqctl set_permissions -p /postal postal ".*" ".*" ".*"
 
 #
@@ -48,6 +48,9 @@ wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
 postal bundle /opt/postal/vendor/bundle
 postal initialize-config
+postal initialize
+postal start
+postal stop
 
 wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
 cp postal.yml.bk /opt/postal/config/postal.yml.bk
@@ -64,8 +67,15 @@ cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g"  /opt/postal/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
 
-postal initialize
 
+
+
+rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
+echo 'ALTER USER `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo 'ALTER USER `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+
+service mysql restart
 postal start
 
 
@@ -76,4 +86,4 @@ cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
 /usr/bin/perl -pi -e  "s/postal.yourdomain.com/YYYFQDNYYY/g"  /etc/nginx/sites-available/default
 /bin/mkdir /etc/nginx/ssl/
 openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=YYYFQDNYYY"
-/bin/systemctl restart nginx 
+service nginx restart
