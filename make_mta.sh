@@ -23,8 +23,8 @@ gem install bundler procodile --no-rdoc --no-ri
 /usr/bin/perl -pi -e  "s/bind-address/#bind-address/g" /etc/mysql/my.cnf
 echo 'CREATE DATABASE `postal` CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;' | mysql -u root
 echo 'GRANT ALL ON `postal`.* TO `postal`@`127.0.0.1` IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
-echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`127.0.0.1`  IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
 echo 'GRANT ALL ON `postal`.* TO `postal`@`localhost` IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
+echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`127.0.0.1`  IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
 echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`localhost`  IDENTIFIED BY "p0stalpassw0rd";' | mysql -u root
 
 #
@@ -71,8 +71,10 @@ cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
 
 
 rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
-echo 'ALTER USER `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
-echo 'ALTER USER `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo "SET PASSWORD FOR 'postal'@'127.0.0.1' = 'YYYMYSQL_ROOT_PASSWORDYYY';" | mysql -u root
+echo "SET PASSWORD FOR 'postal'@'localhost' = 'YYYMYSQL_ROOT_PASSWORDYYY';" | mysql -u root
+#echo 'ALTER USER `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+#echo 'ALTER USER `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 echo 'GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 
 service mysql restart
