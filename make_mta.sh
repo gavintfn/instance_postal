@@ -46,9 +46,9 @@ setcap 'cap_net_bind_service=+ep' /usr/bin/ruby2.3
 sudo -i -u postal mkdir -p /opt/postal/app
 chown postal:postal /opt/postal/app
 wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
-rm /opt/postal/app/spec/config/postal.yml
+rm /opt/postal/config/postal.example.yml
 wget https://raw.githubusercontent.com/gavintfn/postal/master/spec/config/postal.yml
-cp postal.yml /opt/postal/app/spec/config/postal.yml
+cp postal.yml /opt/postal/config/postal.example.yml
 #chown postal:postal /opt/postal/app/spec/config/postal.yml
 #chown postal:postal /opt/postal/ -R
 #cd /opt/postal
