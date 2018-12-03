@@ -44,12 +44,28 @@ setcap 'cap_net_bind_service=+ep' /usr/bin/ruby2.3
 # Application Setup
 #
 sudo -i -u postal mkdir -p /opt/postal/app
-wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
+#wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
+cd /opt/postal
+sudo -i -u postal wget https://github.com/gavintfn/postal/archive/master.zip
+sudo -i -u postal unzip master.zip
+sudo -i -u postal cp /opt/postal/postal-master/* /opt/postal/app/
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
-postal bundle /opt/postal/vendor/bundle
-postal initialize-config
-postal initialize
-postal start
+sudo -i -upostal bundle /opt/postal/vendor/bundle
+
+/usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g" /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/spec/config/postal.yml
+/usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/spec/config/postal.yml
+
+sudo -i -u postal initialize-config
+sudo -i -u postal initialize
+sudo -i -u postal start
 
 
 
@@ -72,16 +88,7 @@ service nginx reload
 #cp /opt/postal/config/postal.yml /opt/postal/config/postal.yml.bkbk
 #rm /opt/postal/config/postal.yml -f
 #cp /opt/postal/config/postal.yml.bk /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/config/postal.yml
-#/usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/config/postal.yml
+
 
 #rabbitmqctl change_password postal YYYMYSQL_ROOT_PASSWORDYYY
 #echo "SET PASSWORD FOR 'postal'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY');" | mysql -u root
