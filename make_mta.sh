@@ -43,19 +43,19 @@ setcap 'cap_net_bind_service=+ep' /usr/bin/ruby2.3
 #
 # Application Setup
 #
-#sudo -i -u postal mkdir -p /opt/postal/app
+mkdir -p /opt/postal/app
 wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
 rm /opt/postal/app/spec/config/postal.yml
 wget https://raw.githubusercontent.com/gavintfn/postal/master/spec/config/postal.yml
 cp postal.yml /opt/postal/app/spec/config/postal.yml
-chown postal:postal /opt/postal/app/spec/config/postal.yml
-chown postal:postal /opt/postal/ -R
+#chown postal:postal /opt/postal/app/spec/config/postal.yml
+#chown postal:postal /opt/postal/ -R
 #cd /opt/postal
 #sudo -i -u postal wget https://github.com/gavintfn/postal/archive/master.zip
 #sudo -i -u postal unzip master.zip
 #sudo -i -u postal cp /opt/postal/postal-master/* /opt/postal/ -R
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
-sudo -i -u postal bundle /opt/postal/vendor/bundle
+postal bundle /opt/postal/vendor/bundle
 
 /usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/spec/config/postal.yml
 /usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/spec/config/postal.yml
