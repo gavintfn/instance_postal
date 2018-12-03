@@ -22,16 +22,16 @@ gem install bundler procodile --no-rdoc --no-ri
 #
 /usr/bin/perl -pi -e  "s/bind-address/#bind-address/g" /etc/mysql/my.cnf
 echo 'CREATE DATABASE `postal` CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;' | mysql -u root
-echo 'GRANT ALL ON `postal`.* TO `postal`@`127.0.0.1` IDENTIFIED BY "XXXMYSQL_ROOT_PASSWORDXXX";' | mysql -u root
-echo 'GRANT ALL ON `postal`.* TO `postal`@`localhost` IDENTIFIED BY "XXXMYSQL_ROOT_PASSWORDXXX";' | mysql -u root
-echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`127.0.0.1`  IDENTIFIED BY "XXXMYSQL_ROOT_PASSWORDXXX";' | mysql -u root
-echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`localhost`  IDENTIFIED BY "XXXMYSQL_ROOT_PASSWORDXXX";' | mysql -u root
+echo 'GRANT ALL ON `postal`.* TO `postal`@`127.0.0.1` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo 'GRANT ALL ON `postal`.* TO `postal`@`localhost` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`127.0.0.1`  IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
+echo 'GRANT ALL PRIVILEGES ON `postal-%` . * to `postal`@`localhost`  IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY";' | mysql -u root
 
 #
 # RabbitMQ
 #
 rabbitmqctl add_vhost /postal
-rabbitmqctl add_user postal XXXMYSQL_ROOT_PASSWORDXXX
+rabbitmqctl add_user postal YYYMYSQL_ROOT_PASSWORDYYY
 rabbitmqctl set_permissions -p /postal postal ".*" ".*" ".*"
 
 #
