@@ -43,32 +43,35 @@ setcap 'cap_net_bind_service=+ep' /usr/bin/ruby2.3
 #
 # Application Setup
 #
-#sudo -i -u postal mkdir -p /opt/postal/app
-chown postal:postal /opt/postal -R
-wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/
-rm /opt/postal/config/postal.example.yml
-wget https://raw.githubusercontent.com/gavintfn/postal/master/spec/config/postal.yml
-cp postal.yml /opt/postal/config/postal.example.yml
-chown postal:postal /opt/postal/config/postal.example.yml
+sudo -i -u postal mkdir -p /opt/postal/app
+#chown postal:postal /opt/postal -R
+wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
+rm /opt/postal/app/config/postal.example.yml
+wget https://raw.githubusercontent.com/gavintfn/postal/master/spec/config/postal.yml -O /opt/postal/app/config/postal.example.yml
+#cp postal.yml /opt/postal/app/config/postal.example.yml
+
 #chown postal:postal /opt/postal/ -R
 #cd /opt/postal
 #sudo -i -u postal wget https://github.com/gavintfn/postal/archive/master.zip
 #sudo -i -u postal unzip master.zip
 #sudo -i -u postal cp /opt/postal/postal-master/* /opt/postal/ -R
+
+
+/usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g" /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g" /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/app/config/postal.example.yml
+/usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/app/config/postal.example.yml
+
+chown postal:postal /opt/postal/app/config/postal.example.yml
+
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
 postal bundle /opt/postal/vendor/bundle
-
-/usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g" /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g" /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/config/postal.example.yml
-/usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/config/postal.example.yml
-
 sudo -i -u postal postal initialize-config
 sudo -i -u postal postal initialize
 sudo -i -u postal postal start
