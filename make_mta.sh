@@ -72,7 +72,7 @@ chown postal:postal /opt/postal/app/config/postal.example.yml
 
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
 postal bundle /opt/postal/vendor/bundle
-echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY'); SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY'); GRANT ALL ON *.* TO `root`@`%` IDENTIFIED BY "YYYMYSQL_ROOT_PASSWORDYYY"; FLUSH PRIVILEGES;" | mysql -u root
+echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY'); SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('YYYMYSQL_ROOT_PASSWORDYYY'); GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'YYYMYSQL_ROOT_PASSWORDYYY'; FLUSH PRIVILEGES;" | mysql -u root
 sudo -i -u postal postal initialize-config
 sudo -i -u postal postal initialize
 sudo -i -u postal postal start
