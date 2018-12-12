@@ -1,7 +1,7 @@
 server {
     listen [::]:80;
     listen 0.0.0.0:80;
-    server_name postal.gavinkette.com;
+    server_name XXXFQDNXXX;
     return 301 https://$host$request_uri;
 }
 
