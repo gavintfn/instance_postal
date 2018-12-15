@@ -1,3 +1,3 @@
 <?php
-echo 'ok... got it.';
+exec('sudo /bin/bash /opt/postal/finish_letsencrypt.sh');
 ?>
