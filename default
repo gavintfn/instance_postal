@@ -23,7 +23,7 @@ A+AESGCM:!aNULL:!eNULL:!LOW:!RC4:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS;
 
     location / {
        client_max_body_size 50M;
-       try_files $uri $uri/index.html $uri.html @puma;
+       try_files $uri $uri/index.html $uri.html index.php @puma;
     }
 
     location /assets {
@@ -37,8 +37,14 @@ A+AESGCM:!aNULL:!eNULL:!LOW:!RC4:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS;
         proxy_set_header X-Forwarded-Proto https;
         proxy_pass http://127.0.0.1:5000;
     }
-        location /.well-known/acme-challenge/ {
-                alias  /opt/postal/app/public/.well-known/acme-challenge;
-        }
+    location /.well-known/acme-challenge/ {
+            alias  /opt/postal/app/public/.well-known/acme-challenge;
+    }
+    location ~ \.php$ {
+      fastcgi_split_path_info ^(.+\.php)(/.+)$;
+      fastcgi_pass 127.0.0.1:9000;
+      fastcgi_index index.php;
+      include fastcgi_params;
+    }
 
 }
