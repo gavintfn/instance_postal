@@ -8,7 +8,7 @@ server {
 server {
     listen [::]:443 ssl;
     listen 0.0.0.0:443 ssl;
-    root /opt/postal/app/public;
+    root /opt/postal/app/public/;
     server_name XXXFQDNXXX;
     ssl_certificate      ssl/postal.cert;
     ssl_certificate_key  ssl/postal.key;
@@ -48,7 +48,7 @@ server {
     }
     
      location /.well-known/acme-challenge/ {
-                alias  /opt/postal/app/public/.well-known/acme-challenge;
+                alias  /opt/postal/app/public/.well-known/acme-challenge/;
      }
    
 }
