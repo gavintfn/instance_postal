@@ -12,6 +12,8 @@ server {
     server_name XXXFQDNXXX;
     ssl_certificate      ssl/postal.cert;
     ssl_certificate_key  ssl/postal.key;
+    #certificate      /etc/nginx/certs/XXXFQDNXXX/cert;
+    #certificate_key  /etc/nginx/certs/XXXFQDNXXX/key;
 
     # Generate using: openssl dhparam 4096 -out /etc/ssl/dhparam.pem
     # ssl_dhparam /etc/ssl/dhparam.pem;
