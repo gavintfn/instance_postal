@@ -1,7 +1,7 @@
 server {
     listen [::]:80;
     listen 0.0.0.0:80;
-    server_name XXX$FQDNXXX;
+    server_name XXXFQDNXXX;
     return 301 https://$host$request_uri;
 }
 
@@ -9,7 +9,7 @@ server {
     listen [::]:443 ssl;
     listen 0.0.0.0:443 ssl;
     root /opt/postal/app/public;
-    server_name XXX$FQDNXXX;
+    server_name XXXFQDNXXX;
     ssl_certificate      ssl/postal.cert;
     ssl_certificate_key  ssl/postal.key;
 
@@ -23,8 +23,9 @@ server {
     location ~ \.php$ {
       fastcgi_split_path_info ^(.+\.php)(/.+)$;
       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-      fastcgi_index index.php;
-      include fastcgi_params;
+      include         fastcgi_params;
+      fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+      fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
     }
     
     location / {
