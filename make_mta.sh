@@ -90,6 +90,18 @@ cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
 openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=example.com"
 service nginx reload
 
+service mysql restart
+
+#
+#add db info
+#
+echo "USE postal; INSERT INTO credentials (credentials.`server_id`, credentials.`key`,credentials`type`,credentials.`name`) VALUES (1,'YYYADMIN_PASSWORDYYY','SMTP','YYYADMIN_USERNAMEYYY');" | mysql -u root -p'YYYMYSQL_ROOT_PASSWORDYYY'
+echo "USE postal; INSERT INTO organizations (organizations.`id`, organizations.`uuid`, organizations.`name`, organizations.`permalink`, organizations.`time_zone`, organizations.`created_at`, organizations.`updated_at`, organizations.`owner_id`) VALUES (1, 'YYYORGANIZATION_UUIDYYY', 'YYYORGANIZATIONYYY', 'YYYORGANIZATION_PERMALINKYYY', 'UTC', NOW(), NOW(), 1);" | mysql -u root -p'YYYMYSQL_ROOT_PASSWORDYYY'
+echo "USE postal; INSERT INTO servers(servers.`id`, servers.`organization_id`, servers.`uuid`, servers.`name`, servers.`mode`, servers.`created_at`, servers.`updated_at`, servers.`permalink`, servers.`message_retention_days`, servers.`raw_message_retention_days`, servers.`raw_message_retention_size`, servers.`allow_sender`, servers.`token`, servers.`spam_threshold`, servers`spam_failure_threshold`, servers.`postmaster_address`, servers.`log_smtp_data`) VALUES (1, 1, 'YYYMAILSERVER_UUIDYYY', 'YYYMAILSERVER_NAMEYYY', 'Live',  NOW(), NOW(), 'YYYMAILSERVER_PERMALINKYYY', 60, 30, 2048, 0, 'l2ui3d', 5.00, 20.00, 'YYYPOSTMASTERYYY', 0); " | mysql -u root -p'YYYMYSQL_ROOT_PASSWORDYYY'
+
+
+
+
 #/usr/bin/printf "$ADMIN_EMAIL\n$ADMIN_FIRSTNAME\n$ADMIN_LASTNAME\n$ADMIN_PASSWORD" | /usr/bin/postal make-user
 
 #wget https://raw.githubusercontent.com/gavintfn/instance_postal/master/postal.yml.bk 
