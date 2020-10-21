@@ -43,11 +43,10 @@ setcap 'cap_net_bind_service=+ep' /usr/bin/ruby2.3
 # Application Setup
 #
 sudo -i -u postal mkdir -p /opt/postal/app
-#chown postal:postal /opt/postal -R
+chown postal:postal /opt/postal -R
 wget https://postal.atech.media/packages/stable/latest.tgz -O - | sudo -u postal tar zxpv -C /opt/postal/app
 rm /opt/postal/app/config/postal.example.yml
 wget https://raw.githubusercontent.com/gavintfn/postal/master/spec/config/postal.yml -O /opt/postal/app/config/postal.example.yml
-#cp postal.yml /opt/postal/app/config/postal.example.yml
 
 #chown postal:postal /opt/postal/ -R
 #cd /opt/postal
@@ -75,8 +74,9 @@ echo "replaceing ip address in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/app/config/postal.example.yml
 echo "replaceing admin userneme in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/app/config/postal.example.yml
+cp /opt/postal/app/config/postal.example.yml /opt/postal/app/config/postal.yml
 
-chown postal:postal /opt/postal/app/config/postal.example.yml
+chown postal:postal /opt/postal -R
 
 ln -s /opt/postal/app/bin/postal /usr/bin/postal
 postal bundle /opt/postal/vendor/bundle
@@ -93,7 +93,7 @@ sudo -i -u postal postal start
 # nginx
 #
 cp /opt/postal/app/resource/nginx.cfg /etc/nginx/sites-available/default
-#usr/bin/perl -pi -e  "s/postal.yourdomain.com/YYYFQDNYYY/g"  /etc/nginx/sites-available/default
+usr/bin/perl -pi -e  "s/postal.yourdomain.com/YYYFQDNYYY/g"  /etc/nginx/sites-available/default
 /bin/mkdir /etc/nginx/ssl/
 openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/postal.key -out /etc/nginx/ssl/postal.cert -days 365 -nodes -subj "/C=GB/ST=Example/L=Example/O=Example/CN=example.com"
 service nginx reload
