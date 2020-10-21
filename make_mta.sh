@@ -5,15 +5,15 @@ set -e
 #
 # Dependencies
 #
-apt update
-apt install -y software-properties-common
+#apt update
+/usr/local/sbin/apt install -y software-properties-common
 apt-add-repository ppa:brightbox/ruby-ng -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirrors.coreix.net/mariadb/repo/10.1/ubuntu xenial main'
 curl -sL https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
 add-apt-repository 'deb http://www.rabbitmq.com/debian/ testing main'
 export DEBIAN_FRONTEND=noninteractive
-apt install -y ruby2.3 ruby2.3-dev build-essential mariadb-server libmysqlclient-dev rabbitmq-server nodejs git nginx wget nano
+/usr/local/sbin/apt install -y ruby2.3 ruby2.3-dev build-essential mariadb-server libmysqlclient-dev rabbitmq-server nodejs git nginx wget nano
 gem install bundler procodile --no-rdoc --no-ri
 
 #
