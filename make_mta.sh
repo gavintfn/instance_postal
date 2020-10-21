@@ -55,16 +55,25 @@ wget https://raw.githubusercontent.com/gavintfn/postal/master/spec/config/postal
 #sudo -i -u postal unzip master.zip
 #sudo -i -u postal cp /opt/postal/postal-master/* /opt/postal/ -R
 
-
+echo "replaceing fqdn in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXFQDNXXX/YYYFQDNYYY/g" /opt/postal/app/config/postal.example.yml
+echo "replaceing mysql root pass in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXMYSQL_ROOT_PASSWORDXXX/YYYMYSQL_ROOT_PASSWORDYYY/g"  /opt/postal/app/config/postal.example.yml
+echo "replaceing rabitmqpass postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXRABBITMQ_PASSWORDXXX/YYYRABBITMQ_PASSWORDYYY/g"  /opt/postal/app/config/postal.example.yml
+echo "replaceing smtp port in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXSMTP_PORTXXX/YYYSMTP_PORTYYY/g"  /opt/postal/app/config/postal.example.yml
+echo "replaceing hostname in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g"  /opt/postal/app/config/postal.example.yml
+echo "replaceing admin email in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXADMIN_EMAILXXX/YYYADMIN_EMAILYYY/g"  /opt/postal/app/config/postal.example.yml
+echo "replaceing admin pass in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXADMIN_PASSWORDXXX/YYYADMIN_PASSWORDYYY/g" /opt/postal/app/config/postal.example.yml
+echo "replaceing hostname in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXHOSTNAMEXXX/YYYHOSTNAMEYYY/g" /opt/postal/app/config/postal.example.yml
+echo "replaceing ip address in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXIPADDRXXX/YYYIPADDRYYY/g"  /opt/postal/app/config/postal.example.yml
+echo "replaceing admin userneme in postal.example.yml"
 /usr/bin/perl -pi -e  "s/XXXADMIN_USERNAMEXXX/YYYADMIN_USERNAMEYYY/g"  /opt/postal/app/config/postal.example.yml
 
 chown postal:postal /opt/postal/app/config/postal.example.yml
